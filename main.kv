@@ -1,0 +1,94 @@
+MainWidget:
+
+# pos_hint: {"x": 1, "y": 1}
+# x, center_x, right
+# y, center_y, top
+
+<MainWidget>:
+
+    # Object properties linking to id's [Used for linking with .py file]
+    btn_sell_all_ores: btn_sell_all_ores
+    btn_forge_gem: btn_forge_gem
+    btn_forge_gem_color: btn_forge_gem_color
+    btn_start_bot: btn_start_bot
+    btn_stop_bot: btn_stop_bot
+    label_info_for_user: label_info_for_user
+    # Python: Kivy ID
+    
+
+    GridLayout:
+        size: root.width, root.height
+        rows: 4
+        cols: 1
+        spacing: "50dp"
+        
+        # Top: Text about bot
+        FloatLayout:
+            Label:
+                id: label_info_text
+                text: "MrMine BOT"
+                font_size: (root.width+root.height) / 26
+                pos_hint: {"center_x": 0.5, "top": 0.9}
+            Label:
+                text: "Created by Victor"
+                font_size: label_info_text.font_size / 2.2
+                pos_hint: {"center_x": 0.5, "top": 0.65}
+
+        
+        # Middle: Buttons for bot
+        BoxLayout:
+            orientation: "vertical"
+            spacing: "20dp"
+            ToggleButton:
+                id: btn_sell_all_ores
+                text: "Sell all ores"
+                font_size: (root.width+root.height) / 80
+                size_hint: 0.4, 1
+                pos_hint: {"center_x": 0.5}
+            GridLayout:
+                rows: 1
+                cols: 2
+                spacing: "20dp"
+                size_hint: 0.4, 1
+                pos_hint: {"center_x": 0.5}
+                ToggleButton:
+                    id: btn_forge_gem
+                    text: "Forge gem"
+                    font_size: btn_sell_all_ores.font_size
+                    size_hint: 0.1, 1
+                    on_state: root.btn_click_forge_gem()
+                Spinner:
+                    id: btn_forge_gem_color
+                    text: "Gem color?"
+                    font_size: btn_sell_all_ores.font_size
+                    values: ["Red", "Blue", "Green", "Purple", "Yellow"]
+                    size_hint: 0.05, 1
+                    disabled: btn_forge_gem.state == "normal"
+                            
+
+        # Bottom: Buttons to start bot
+        BoxLayout:
+            size_hint: 1, 0.7
+            padding: "20dp"
+            spacing: "20dp"
+            Button:
+                id: btn_start_bot
+                text: "Start"
+                font_size: btn_sell_all_ores.font_size * 2
+                on_press: root.btn_click_start_bot()
+            Button:
+                id: btn_stop_bot
+                text: "STOP"
+                font_size: btn_sell_all_ores.font_size * 2
+                on_press: root.btn_click_stop_bot()
+                disabled: True
+        
+        # W.I.P
+        BoxLayout:
+            size_hint: 1, 0.1
+            Label:
+                id: label_info_for_user
+                text: "All ores were sold XXX times"
+                font_size: (root.width+root.height) / 40
+                pos_hint: {"center_x": 0.5, "y": 1}
+                
